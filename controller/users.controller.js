@@ -48,8 +48,42 @@ const getUser = async (req, res) => {
   }
 };
 
+const changePassword = async (req, res) => {
+  try {
+    const { oldPassword, newPassword } = req.body;
+    const user = await User.findById(req.user.id);
+    console.log(user, oldPassword, newPassword);
+    const isMatch = await bycrypt.compare(oldPassword, user.password);
+    if (!isMatch) {
+      res.status(400).json({ message: "Invalid credentials" });
+      return;
+    }
+    const salt = await bycrypt.genSalt(10);
+    const hashedPassword = await bycrypt.hash(newPassword, salt);
+    await User.findByIdAndUpdate(req.user.id, {
+      password: hashedPassword,
+    });
+    res.status(200).json({ message: "Password changed successfully" });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+const updateUser = async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.user.id, req.body, {
+      new: true,
+    }).select("-password");
+    res.status(200).json({ user });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 module.exports = {
   register,
   login,
   getUser,
+  changePassword,
+  updateUser,
 };

@@ -1,0 +1,205 @@
+{
+  "cartItems": [
+    {
+      "variant": {
+        "_id": "6445a8036c01ff5efdbfb8ec",
+        "title": "Naruto Nine Tails Red",
+        "handle": "naruto-nine-tails-red",
+        "categories": [
+          {
+            "_id": "6441c7aad56bdbac416b66f8",
+            "title": "T-Shirts",
+            "handle": "tshirts",
+            "isDeleted": false,
+            "isActive": true,
+            "createdAt": "2023-04-20T23:15:54.660Z",
+            "updatedAt": "2023-04-20T23:15:54.660Z",
+            "__v": 0
+          },
+          {
+            "_id": "6445a7636c01ff5efdbfb878",
+            "title": "Men",
+            "handle": "men",
+            "isDeleted": false,
+            "isActive": true,
+            "createdAt": "2023-04-23T21:47:15.594Z",
+            "updatedAt": "2023-04-23T21:47:15.594Z",
+            "__v": 0
+          }
+        ],
+        "color": "Red",
+        "sizes": [
+          {
+            "sizeOption": "XS",
+            "inventory": 2,
+            "_id": "6445a8036c01ff5efdbfb8ed"
+          },
+          {
+            "sizeOption": "S",
+            "inventory": 3,
+            "_id": "6445a8036c01ff5efdbfb8ee"
+          },
+          {
+            "sizeOption": "M",
+            "inventory": null,
+            "_id": "6445a8036c01ff5efdbfb8ef"
+          },
+          {
+            "sizeOption": "L",
+            "inventory": null,
+            "_id": "6445a8036c01ff5efdbfb8f0"
+          },
+          {
+            "sizeOption": "XL",
+            "inventory": null,
+            "_id": "6445a8036c01ff5efdbfb8f1"
+          },
+          {
+            "sizeOption": "2XL",
+            "inventory": null,
+            "_id": "6445a8036c01ff5efdbfb8f2"
+          }
+        ],
+        "product_code": "P0001-red",
+        "price": 500,
+        "compare_at_price": 1500,
+        "product": "6445a7e96c01ff5efdbfb8e6",
+        "images": [
+          {
+            "_id": "6445a7ff6c01ff5efdbfb8e8",
+            "name": "naruto-hd.jpg",
+            "public_id": "fdj7hea49uvknhyoibat",
+            "src": "https://res.cloudinary.com/dom1rqxf0/image/upload/v1682286591/fdj7hea49uvknhyoibat.jpg",
+            "isDeleted": false,
+            "isActive": true,
+            "createdAt": "2023-04-23T21:49:51.937Z",
+            "updatedAt": "2023-04-23T21:49:51.937Z",
+            "__v": 0
+          },
+          {
+            "_id": "6445a8006c01ff5efdbfb8ea",
+            "name": "naruto.jpg",
+            "public_id": "ajzmgzhonmvz6sklisr8",
+            "src": "https://res.cloudinary.com/dom1rqxf0/image/upload/v1682286591/ajzmgzhonmvz6sklisr8.jpg",
+            "isDeleted": false,
+            "isActive": true,
+            "createdAt": "2023-04-23T21:49:52.442Z",
+            "updatedAt": "2023-04-23T21:49:52.442Z",
+            "__v": 0
+          }
+        ],
+        "isDeleted": false,
+        "isActive": true,
+        "createdAt": "2023-04-23T21:49:55.611Z",
+        "updatedAt": "2023-04-23T21:49:55.611Z",
+        "__v": 0
+      },
+      "quantity": 1,
+      "size": "XS",
+      "cartItemId": "4d2324a5-8648-4952-8451-ba7a1f01d959",
+      "selectedProductColor": "Red",
+      "selectedProductSize": "XS"
+    },
+    {
+      "variant": {
+        "_id": "6445a8036c01ff5efdbfb8ec",
+        "title": "Naruto Nine Tails Red",
+        "handle": "naruto-nine-tails-red",
+        "categories": [
+          {
+            "_id": "6441c7aad56bdbac416b66f8",
+            "title": "T-Shirts",
+            "handle": "tshirts",
+            "isDeleted": false,
+            "isActive": true,
+            "createdAt": "2023-04-20T23:15:54.660Z",
+            "updatedAt": "2023-04-20T23:15:54.660Z",
+            "__v": 0
+          },
+          {
+            "_id": "6445a7636c01ff5efdbfb878",
+            "title": "Men",
+            "handle": "men",
+            "isDeleted": false,
+            "isActive": true,
+            "createdAt": "2023-04-23T21:47:15.594Z",
+            "updatedAt": "2023-04-23T21:47:15.594Z",
+            "__v": 0
+          }
+        ],
+        "color": "Red",
+        "sizes": [
+          {
+            "sizeOption": "XS",
+            "inventory": 2,
+            "_id": "6445a8036c01ff5efdbfb8ed"
+          },
+          {
+            "sizeOption": "S",
+            "inventory": 3,
+            "_id": "6445a8036c01ff5efdbfb8ee"
+          },
+          {
+            "sizeOption": "M",
+            "inventory": null,
+            "_id": "6445a8036c01ff5efdbfb8ef"
+          },
+          {
+            "sizeOption": "L",
+            "inventory": null,
+            "_id": "6445a8036c01ff5efdbfb8f0"
+          },
+          {
+            "sizeOption": "XL",
+            "inventory": null,
+            "_id": "6445a8036c01ff5efdbfb8f1"
+          },
+          {
+            "sizeOption": "2XL",
+            "inventory": null,
+            "_id": "6445a8036c01ff5efdbfb8f2"
+          }
+        ],
+        "product_code": "P0001-red",
+        "price": 500,
+        "compare_at_price": 1500,
+        "product": "6445a7e96c01ff5efdbfb8e6",
+        "images": [
+          {
+            "_id": "6445a7ff6c01ff5efdbfb8e8",
+            "name": "naruto-hd.jpg",
+            "public_id": "fdj7hea49uvknhyoibat",
+            "src": "https://res.cloudinary.com/dom1rqxf0/image/upload/v1682286591/fdj7hea49uvknhyoibat.jpg",
+            "isDeleted": false,
+            "isActive": true,
+            "createdAt": "2023-04-23T21:49:51.937Z",
+            "updatedAt": "2023-04-23T21:49:51.937Z",
+            "__v": 0
+          },
+          {
+            "_id": "6445a8006c01ff5efdbfb8ea",
+            "name": "naruto.jpg",
+            "public_id": "ajzmgzhonmvz6sklisr8",
+            "src": "https://res.cloudinary.com/dom1rqxf0/image/upload/v1682286591/ajzmgzhonmvz6sklisr8.jpg",
+            "isDeleted": false,
+            "isActive": true,
+            "createdAt": "2023-04-23T21:49:52.442Z",
+            "updatedAt": "2023-04-23T21:49:52.442Z",
+            "__v": 0
+          }
+        ],
+        "isDeleted": false,
+        "isActive": true,
+        "createdAt": "2023-04-23T21:49:55.611Z",
+        "updatedAt": "2023-04-23T21:49:55.611Z",
+        "__v": 0
+      },
+      "quantity": 2,
+      "size": "S",
+      "cartItemId": "ba97f0d4-5f1d-4739-9bed-3fea15fc3c39",
+      "selectedProductColor": "Red",
+      "selectedProductSize": "S"
+    }
+  ],
+  "cartTotalPrice": 1500
+}

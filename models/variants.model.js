@@ -4,18 +4,18 @@ const VariantSchema = new mongoose.Schema(
   {
     title: { type: String },
     handle: { type: String },
-    category: { type: mongoose.Schema.Types.ObjectId, ref: "categories" },
-    color: { type: String },
+    categories: [{ type: mongoose.Schema.Types.ObjectId, ref: "categories" }],
+    color: { type: mongoose.Schema.Types.ObjectId, ref: "colors" },
     sizes: [
       {
         sizeOption: { type: String },
-        inventory: { type: Number },
+        inventory: { type: Number, default: 0 },
       },
     ],
     product_code: { type: String },
     price: { type: Number },
     compare_at_price: { type: Number },
-    productId: { type: mongoose.Schema.Types.ObjectId, ref: "products" },
+    product: { type: mongoose.Schema.Types.ObjectId, ref: "products" },
     images: [{ type: mongoose.Schema.Types.ObjectId, ref: "files" }],
     isDeleted: { type: Boolean, default: false },
     isActive: { type: Boolean, default: true },

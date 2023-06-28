@@ -20,6 +20,12 @@ app.use("/api/files", require("./router/files.router"));
 app.use("/api/products", require("./router/products.router"));
 app.use("/api/variants", require("./router/variants.router"));
 app.use("/api/categories", require("./router/categories.router"));
+app.use("/api/cart", require("./router/cart.router"));
+app.use("/api/addresses", require("./router/addresses.router"));
+app.use("/api/orders", require("./router/orders.router"));
+app.use("/api/shipping", require("./router/shipping.router"));
+app.use("/api/coupons", require("./router/coupons.router"));
+app.use("/api/colors", require("./router/colors.router"));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`On PORT ${PORT}`));

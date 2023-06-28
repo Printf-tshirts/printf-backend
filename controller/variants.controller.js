@@ -3,8 +3,7 @@ const Product = require("../models/products.model");
 const addVariant = async (req, res) => {
   try {
     const variant = await Variant.create(req.body.variant);
-    console.log(variant);
-    await Product.findByIdAndUpdate(req.body.variant.productId, {
+    await Product.findByIdAndUpdate(req.body.variant.product, {
       $push: { variants: variant._id },
     });
     res.status(200).json({ variant });
@@ -15,11 +14,24 @@ const addVariant = async (req, res) => {
 
 const getVariants = async (req, res) => {
   try {
-    const variants = await Variant.find({ productId: req.query.productId })
+    const variants = await Variant.find({ product: req.query.productId })
       .populate("images")
       .skip(req.query.skip)
       .limit(req.query.limit);
     res.status(200).json({ variants });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+const getVariantByHandle = async (req, res) => {
+  try {
+    const variant = await Variant.findOne({
+      handle: req.query.variantHandle,
+    })
+      .populate("images")
+      .populate("product")
+      .populate("category");
+    res.status(200).json({ variant });
   } catch (error) {
     res.status(500).json({ error });
   }
@@ -57,6 +69,7 @@ const updateVariantStatus = async (req, res) => {
 module.exports = {
   addVariant,
   getVariants,
+  getVariantByHandle,
   updateVariant,
   updateVariantStatus,
 };
