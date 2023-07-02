@@ -11,13 +11,13 @@ cloudinary.config({
 
 require("./config/db.config");
 const app = express();
-// app.use(cors());
-var corsOptions = {
-  origin: "http://*.printcoder.com",
-  optionsSuccessStatus: 200,
-};
+app.use(cors());
+// var corsOptions = {
+//   origin: "http://*.printcoder.com",
+//   optionsSuccessStatus: 200,
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
