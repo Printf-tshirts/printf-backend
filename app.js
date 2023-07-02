@@ -13,19 +13,12 @@ require("./config/db.config");
 const app = express();
 const originList = ["http://printcoder.com", "http://*.printcoder.com"];
 // app.use(cors());
-app.use(
-  cors({
-    credentials: true,
-    origin: (origin, cb) => {
-      console.log(origin);
-      if (originList.includes(origin)) {
-        cb(null, true);
-      } else {
-        cb(new Error("Not allowed by CORS"));
-      }
-    },
-  }),
-);
+var corsOptions = {
+  origin: "http://*.printcoder.com",
+  optionsSuccessStatus: 200, // For legacy browser support
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
