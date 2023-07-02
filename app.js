@@ -11,14 +11,18 @@ cloudinary.config({
 
 require("./config/db.config");
 const app = express();
+const originList = ["https://printcoder.com", "https://*.printcoder.com"];
+// app.use(cors());
 app.use(
   cors({
-    origin: [
-      "https://printcoder.com",
-      "http://localhost:3000",
-      "http://localhost:3001",
-      "https://*.printcoder.com",
-    ],
+    credentials: true,
+    origin: (origin, cb) => {
+      if (originList) {
+        cb(null, true);
+      } else {
+        cb(new Error("Not allowed by CORS"));
+      }
+    },
   }),
 );
 app.use(express.json());
