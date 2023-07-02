@@ -160,6 +160,14 @@ const getProductsByCategory = async (req, res) => {
           as: "categories",
         },
       },
+      {
+        $lookup: {
+          from: "images",
+          localField: "images",
+          foreignField: "_id",
+          as: "images",
+        },
+      },
       { $match: filter },
       {
         $skip: parseInt(skip || 0),
