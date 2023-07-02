@@ -17,7 +17,8 @@ app.use(
   cors({
     credentials: true,
     origin: (origin, cb) => {
-      if (originList) {
+      console.log(origin);
+      if (originList.includes(origin)) {
         cb(null, true);
       } else {
         cb(new Error("Not allowed by CORS"));
