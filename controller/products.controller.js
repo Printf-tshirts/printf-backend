@@ -162,7 +162,7 @@ const getProductsByCategory = async (req, res) => {
       },
       {
         $lookup: {
-          from: "images",
+          from: "files",
           localField: "images",
           foreignField: "_id",
           as: "images",
