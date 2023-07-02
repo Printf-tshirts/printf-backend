@@ -11,7 +11,7 @@ cloudinary.config({
 
 require("./config/db.config");
 const app = express();
-const originList = ["https://printcoder.com", "https://*.printcoder.com"];
+const originList = ["http://printcoder.com", "http://*.printcoder.com"];
 // app.use(cors());
 app.use(
   cors({
