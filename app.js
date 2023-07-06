@@ -13,7 +13,7 @@ require("./config/db.config");
 const app = express();
 app.use(
   cors({
-    origin: /\.printcoder\.com$/, // Regex pattern for your domain and all its subdomains
+    origin: ["https://printcoder.com", "https://*.printcoder.com"],
     methods: ["GET", "POST", "PUT", "DELETE"], // Specify the allowed HTTP methods
     allowedHeaders: ["Content-Type", "Authorization", "x-requested-with"], // Allow only certain headers
     allowCredentials: true,
