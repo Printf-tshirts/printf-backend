@@ -15,6 +15,7 @@ app.use(
   cors({
     origin: /\.printcoder\.com$/, // Regex pattern for your domain and all its subdomains
     methods: ["GET", "POST", "PUT", "DELETE"], // Specify the allowed HTTP methods
+    allowedHeaders: "*",
   }),
 );
 app.use(express.json());
