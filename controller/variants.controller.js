@@ -16,6 +16,7 @@ const getVariants = async (req, res) => {
   try {
     const variants = await Variant.find({ product: req.query.productId })
       .populate("images")
+      .populate("color")
       .skip(req.query.skip)
       .limit(req.query.limit);
     res.status(200).json({ variants });
@@ -36,11 +37,23 @@ const getVariantByHandle = async (req, res) => {
     res.status(500).json({ error });
   }
 };
+const deleteVariant = async (req, res) => {
+  try {
+    const variant = await Variant.findByIdAndDelete(req.query.variantId);
+    const product = await Product.findByIdAndUpdate(variant.product, {
+      $pull: { variants: variant._id },
+    });
+
+    res.status(200).json({ variant });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
 
 const updateVariant = async (req, res) => {
   try {
     const variant = await Variant.findByIdAndUpdate(
-      req.body.variantId,
+      req.query.variantId,
       req.body,
     );
     res.status(200).json({ variant });
@@ -70,6 +83,7 @@ module.exports = {
   addVariant,
   getVariants,
   getVariantByHandle,
+  deleteVariant,
   updateVariant,
   updateVariantStatus,
 };

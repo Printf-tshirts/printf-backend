@@ -24,6 +24,14 @@ const getProducts = async (req, res) => {
     const productsCount = await Product.find().count("productsCount");
     const products = await Product.find()
       .populate("categories")
+      .populate("images")
+      .populate({
+        path: "variants",
+        populate: {
+          path: "images",
+          path: "color",
+        },
+      })
       .skip(parseInt(skip || 0))
       .limit(parseInt(limit || 10));
     res
@@ -37,12 +45,25 @@ const getProducts = async (req, res) => {
 
 const getProduct = async (req, res) => {
   try {
-    console.log(req.query.productId);
     const product = await Product.findById(req.query.productId).populate({
       path: "variants",
       populate: {
         path: "images",
         path: "color",
+      },
+    });
+    res.status(200).json({ product });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+const deleteProduct = async (req, res) => {
+  try {
+    const product = await Product.findByIdAndDelete(req.query.productId);
+    const variants = await Variant.find({ product: product._id });
+    await Variant.deleteMany({
+      _id: {
+        $in: variants.map((variant) => variant._id),
       },
     });
     res.status(200).json({ product });
@@ -287,8 +308,9 @@ const getProductsBySearch = async (req, res) => {
 };
 const updateProduct = async (req, res) => {
   try {
+    console.log(req.body, req.query.productId);
     const product = await Product.findByIdAndUpdate(
-      req.body.productId,
+      req.query.productId,
       req.body,
     );
     res.status(200).json({ product });
@@ -319,6 +341,7 @@ module.exports = {
   getProducts,
   getProduct,
   getProductByVariantHandle,
+  deleteProduct,
   updateProduct,
   updateProductStatus,
   getProductsByCategory,
