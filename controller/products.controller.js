@@ -32,7 +32,7 @@ const getProducts = async (req, res) => {
           path: "color",
         },
       })
-      .populate("design_typess")
+      .populate("design_types")
       .skip(parseInt(skip || 0))
       .limit(parseInt(limit || 10));
     res
