@@ -15,8 +15,12 @@ const ProductsSchema = new mongoose.Schema(
     ],
     product_code: { type: String },
     tags: { type: Array },
+    design_types: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "designTypes" },
+    ],
     variants: [{ type: mongoose.Schema.Types.ObjectId, ref: "variants" }],
-    printSize: { type: String },
+    print_size: { type: String },
+
     images: [{ type: mongoose.Schema.Types.ObjectId, ref: "files" }],
     isDeleted: { type: Boolean, default: false },
     isActive: { type: Boolean, default: true },

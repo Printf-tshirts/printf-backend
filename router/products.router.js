@@ -11,6 +11,7 @@ router.get(
   controller.getProductByVariantHandle,
 );
 router.get("/get-products-by-search", controller.getProductsBySearch);
+router.get("/get-tags-from-category", controller.getTagsFromCategory);
 router.delete("/delete-product", authenticateToken, controller.deleteProduct);
 router.put("/update-product", authenticateToken, controller.updateProduct);
 router.put("/update-status", authenticateToken, controller.updateProductStatus);

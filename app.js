@@ -37,6 +37,7 @@ app.use("/api/orders", require("./router/orders.router"));
 app.use("/api/shipping", require("./router/shipping.router"));
 app.use("/api/coupons", require("./router/coupons.router"));
 app.use("/api/colors", require("./router/colors.router"));
+app.use("/api/design-types", require("./router/designTypes.router"));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`On PORT ${PORT}`));

@@ -32,6 +32,7 @@ const getProducts = async (req, res) => {
           path: "color",
         },
       })
+      .populate("design_types")
       .skip(parseInt(skip || 0))
       .limit(parseInt(limit || 10));
     res
@@ -336,11 +337,34 @@ const updateProductStatus = async (req, res) => {
   }
 };
 
+const getTagsFromCategory = async (req, res) => {
+  try {
+    const { categoryHandle } = req.query;
+    const category = await Category.findOne({
+      handle: categoryHandle,
+    });
+    const products = await Product.find({
+      categories: category._id,
+    }).select("tags");
+    const tags = [];
+    products.forEach((product) => {
+      product.tags.forEach((tag) => {
+        if (tags.includes(tag)) return;
+        tags.push(tag);
+      });
+    });
+    res.status(200).json({ tags });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 module.exports = {
   addProduct,
   getProducts,
   getProduct,
   getProductByVariantHandle,
+  getTagsFromCategory,
   deleteProduct,
   updateProduct,
   updateProductStatus,
