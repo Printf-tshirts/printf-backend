@@ -32,7 +32,7 @@ const getProducts = async (req, res) => {
           path: "color",
         },
       })
-      .populate("design_types")
+      .populate("design_typess")
       .skip(parseInt(skip || 0))
       .limit(parseInt(limit || 10));
     res
@@ -119,7 +119,7 @@ const getProductsByCategory = async (req, res) => {
       size,
       categoryId,
       categoryHandle,
-      tags,
+      design_types,
       skip,
       limit,
       priceSort,
@@ -138,7 +138,8 @@ const getProductsByCategory = async (req, res) => {
       };
     if (categoryId)
       filter["variants.categories"] = new mongoose.Types.ObjectId(categoryId);
-    if (tags) filter["tags"] = { $in: tags.split(",") };
+    if (design_types)
+      filter["design_types"] = new mongoose.Types.ObjectId(design_types);
     console.log(filter);
     const productsCount = await Product.aggregate([
       { $unwind: "$variants" },
