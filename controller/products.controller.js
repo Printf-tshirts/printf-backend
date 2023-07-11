@@ -35,9 +35,7 @@ const getProducts = async (req, res) => {
       .populate("design_types")
       .skip(parseInt(skip || 0))
       .limit(parseInt(limit || 10));
-    res
-      .status(200)
-      .json({ products, productsCount: productsCount[0]?.productsCount });
+    res.status(200).json({ products, productsCount });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });

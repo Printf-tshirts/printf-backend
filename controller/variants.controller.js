@@ -14,12 +14,15 @@ const addVariant = async (req, res) => {
 
 const getVariants = async (req, res) => {
   try {
+    const variantsCount = await Variant.find({
+      product: req.query.productId,
+    }).count("variantsCount");
     const variants = await Variant.find({ product: req.query.productId })
       .populate("images")
       .populate("color")
       .skip(req.query.skip)
       .limit(req.query.limit);
-    res.status(200).json({ variants });
+    res.status(200).json({ variants, variantsCount });
   } catch (error) {
     res.status(500).json({ error });
   }
