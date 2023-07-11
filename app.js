@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const Variant = require("./models/variants.model");
+const DesignType = require("./models/designTypes.model");
 const cloudinary = require("cloudinary").v2;
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
@@ -20,6 +22,7 @@ app.use(
     allowCredentials: true,
   }),
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

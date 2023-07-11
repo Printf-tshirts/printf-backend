@@ -8,6 +8,11 @@ const {
   extractSizesFromSearchQuery,
   extractCategoryFromSearchQuery,
 } = require("../utils/modifySearchQuery");
+const {
+  updateProductClickCount,
+  updateVariantClickCount,
+} = require("../utils/updateClickCount");
+const DesignType = require("../models/designTypes.model");
 
 const addProduct = async (req, res) => {
   try {
@@ -51,6 +56,8 @@ const getProduct = async (req, res) => {
         path: "color",
       },
     });
+    const clickCount = product.clickCount ? product.clickCount + 1 : 1;
+    updateProductClickCount(product._id, clickCount);
     res.status(200).json({ product });
   } catch (error) {
     res.status(500).json({ error });
@@ -102,7 +109,10 @@ const getProductByVariantHandle = async (req, res) => {
       })
       .populate("images")
       .populate("categories");
-    console.log(product);
+    let clickCount = product.clickCount ? product.clickCount + 1 : 1;
+    updateProductClickCount(product._id, clickCount);
+    clickCount = variant.clickCount ? variant.clickCount + 1 : 1;
+    updateVariantClickCount(variant._id, clickCount);
     res.status(200).json({ product });
   } catch (error) {
     console.log(error);
@@ -118,10 +128,21 @@ const getProductsByCategory = async (req, res) => {
       categoryId,
       categoryHandle,
       design_types,
+      design_type_handle,
       skip,
       limit,
       priceSort,
+      sortBy,
     } = req.query;
+    if (design_type_handle && !design_types) {
+      const designType = await DesignType.findOne({
+        handle: design_type_handle,
+      });
+      if (!designType)
+        return res.status(404).json({ error: "Design type not found" });
+      design_types = designType._id;
+    }
+
     if (categoryHandle && !categoryId) {
       const category = await Category.findOne({ handle: categoryHandle });
       if (!category)
@@ -138,6 +159,12 @@ const getProductsByCategory = async (req, res) => {
       filter["variants.categories"] = new mongoose.Types.ObjectId(categoryId);
     if (design_types)
       filter["design_types"] = new mongoose.Types.ObjectId(design_types);
+    const sortQuery = {};
+    if (sortBy === "price") {
+      sortQuery["variants.price"] = priceSort === "asc" ? 1 : -1;
+    } else {
+      sortQuery["variants.clickCount"] = -1;
+    }
     console.log(filter);
     const productsCount = await Product.aggregate([
       { $unwind: "$variants" },
@@ -153,6 +180,7 @@ const getProductsByCategory = async (req, res) => {
         $match: filter,
       },
     ]).count("productsCount");
+
     const products = await Product.aggregate([
       { $unwind: "$variants" },
       {
@@ -190,13 +218,10 @@ const getProductsByCategory = async (req, res) => {
         },
       },
       { $match: filter },
-      {
-        $skip: parseInt(skip || 0),
-      },
-      {
-        $limit: parseInt(limit || 10),
-      },
-    ]).sort({ "variants.price": parseInt(priceSort) });
+    ])
+      .sort(sortQuery)
+      .skip(parseInt(skip || 0))
+      .limit(parseInt(limit || 10));
     res
       .status(200)
       .json({ products, productsCount: productsCount[0]?.productsCount });

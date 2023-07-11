@@ -14,6 +14,7 @@ const VariantSchema = new mongoose.Schema(
     ],
     product_code: { type: String },
     price: { type: Number, default: 499 },
+    clickCount: { type: Number, default: 0 },
     compare_at_price: { type: Number, default: 0 },
     product: { type: mongoose.Schema.Types.ObjectId, ref: "products" },
     images: [{ type: mongoose.Schema.Types.ObjectId, ref: "files" }],

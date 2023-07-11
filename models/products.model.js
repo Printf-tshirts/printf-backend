@@ -19,6 +19,7 @@ const ProductsSchema = new mongoose.Schema(
       { type: mongoose.Schema.Types.ObjectId, ref: "designTypes" },
     ],
     variants: [{ type: mongoose.Schema.Types.ObjectId, ref: "variants" }],
+    clickCount: { type: Number, default: 0 },
     print_size: { type: String },
 
     images: [{ type: mongoose.Schema.Types.ObjectId, ref: "files" }],
