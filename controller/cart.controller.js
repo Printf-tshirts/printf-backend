@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Cart = require("./../models/cart.model");
+const { verifyQuantity } = require("../utils/inventory");
 
 const getCart = async (req, res) => {
   try {
@@ -26,9 +27,38 @@ const getCart = async (req, res) => {
     res.status(500).json({ error });
   }
 };
+const verifyCart = async (req, res) => {
+  try {
+    const cart = await Cart.findOne({
+      user: req.user.id,
+      isConvertedToOrder: false,
+    }).populate("items.variant");
+    const quantityStatus = await verifyQuantity(cart.items);
+
+    if (quantityStatus) {
+      res.status(200).json({ cartVerified: false, message: quantityStatus });
+      return;
+    }
+    if (!cart) {
+      res.status(200).json({ cartVerified: false, message: "Cart not found" });
+      return;
+    }
+    res.status(200).json({ cartVerified: true, cart });
+  } catch (error) {
+    res.status(500).json({ cartVerified: false, error });
+  }
+};
+
 const updateCart = async (req, res) => {
   try {
     let cart = null;
+    const quantityStatus = await verifyQuantity(req.body.cart.items);
+
+    if (quantityStatus) {
+      res.status(400).json({ error: quantityStatus });
+      return;
+    }
+
     if (req.body.cart.user) {
       cart = await Cart.findOneAndUpdate(
         { user: req.body.cart.user, isConvertedToOrder: false },
@@ -78,4 +108,5 @@ const updateCart = async (req, res) => {
 module.exports = {
   getCart,
   updateCart,
+  verifyCart,
 };

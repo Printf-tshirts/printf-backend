@@ -1,5 +1,6 @@
 const Cart = require("../models/cart.model");
 const Order = require("../models/orders.model");
+const { updateInventory, verifyQuantity } = require("../utils/inventory");
 
 const generateOrderHandle = (lastOrder) => {
   let handle = "";
@@ -16,17 +17,27 @@ const generateOrderHandle = (lastOrder) => {
 const addOrder = async (req, res) => {
   try {
     const lastOrder = await Order.find().sort({ createdAt: -1 }).limit(1);
-
+    const cart = await Cart.findById(req.body.order.cart).populate(
+      "items.variant",
+    );
+    const quantityStatus = await verifyQuantity(cart.items);
+    console.log("quantityStatus", quantityStatus);
+    if (quantityStatus) {
+      res.status(400).json({ error: quantityStatus });
+      return;
+    }
     const order = await Order.create({
       ...req.body.order,
       handle: generateOrderHandle(lastOrder[0]),
     });
-    const cart = await Cart.findOneAndUpdate(
+    await Cart.findOneAndUpdate(
       { _id: req.body.order.cart },
       { $set: { isConvertedToOrder: true } },
     );
+    updateInventory(order);
     res.status(200).json({ order });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error });
   }
 };

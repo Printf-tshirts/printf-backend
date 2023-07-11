@@ -134,13 +134,13 @@ const getProductsByCategory = async (req, res) => {
       priceSort,
       sortBy,
     } = req.query;
-    if (design_type_handle && !design_types) {
+    if (design_type_handle != undefined && !design_types) {
       const designType = await DesignType.findOne({
         handle: design_type_handle,
       });
-      if (!designType)
-        return res.status(404).json({ error: "Design type not found" });
-      design_types = designType._id;
+      // if (!designType)
+      //   return res.status(404).json({ error: "Design type not found" });
+      design_types = designType?._id;
     }
 
     if (categoryHandle && !categoryId) {
