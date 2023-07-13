@@ -29,10 +29,7 @@ const getCart = async (req, res) => {
 };
 const verifyCart = async (req, res) => {
   try {
-    const cart = await Cart.findOne({
-      user: req.user.id,
-      isConvertedToOrder: false,
-    }).populate("items.variant");
+    const cart = await Cart.findById(req.body.cartId).populate("items.variant");
     const quantityStatus = await verifyQuantity(cart.items);
 
     if (quantityStatus) {
@@ -55,11 +52,11 @@ const updateCart = async (req, res) => {
     const quantityStatus = await verifyQuantity(req.body.cart.items);
 
     if (quantityStatus) {
-      res.status(400).json({ error: quantityStatus });
+      res.status(200).json({ cartVerified: false, error: quantityStatus });
       return;
     }
 
-    if (req.body.cart.user) {
+    if (req.body.cart.user != null) {
       cart = await Cart.findOneAndUpdate(
         { user: req.body.cart.user, isConvertedToOrder: false },
         {
@@ -83,7 +80,7 @@ const updateCart = async (req, res) => {
           cart = await Cart.create(req.body.cart);
         }
       }
-      res.status(200).json({ cart });
+      res.status(200).json({ cartVerified: true, cart });
     } else if (req.body.cart.session) {
       cart = await Cart.findOneAndUpdate(
         { session: req.body.cart.session, isConvertedToOrder: false },
@@ -97,7 +94,7 @@ const updateCart = async (req, res) => {
       if (!cart) {
         cart = await Cart.create(req.body.cart);
       }
-      res.status(200).json({ cart });
+      res.status(200).json({ cartVerified: true, cart });
     }
   } catch (error) {
     console.log(error);

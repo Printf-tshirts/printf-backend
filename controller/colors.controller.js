@@ -1,8 +1,8 @@
-const Colors = require("../models/colors.model.js");
+const Color = require("../models/colors.model.js");
 
 const getColors = async (req, res) => {
   try {
-    const colors = await Colors.find();
+    const colors = await Color.find();
     res.status(200).json({ colors });
   } catch (error) {
     res.status(500).json({ error });
@@ -11,7 +11,7 @@ const getColors = async (req, res) => {
 
 const addColor = async (req, res) => {
   try {
-    const color = await Colors.create(req.body);
+    const color = await Color.create(req.body);
     res.status(200).json({ color });
   } catch (error) {
     res.status(500).json({ error });

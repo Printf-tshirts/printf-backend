@@ -1,8 +1,8 @@
-const Subscribers = require("../models/subscribers.model.js");
+const Subscriber = require("../models/subscribers.model.js");
 
 const getSubscribers = async (req, res) => {
   try {
-    const subscribers = await Subscribers.find();
+    const subscribers = await Subscriber.find();
     res.status(200).json({ subscribers });
   } catch (error) {
     res.status(500).json({ error });
@@ -11,7 +11,7 @@ const getSubscribers = async (req, res) => {
 
 const addSubscriber = async (req, res) => {
   try {
-    const subscriber = await Subscribers.findOne({ email: req.query.EMAIL });
+    const subscriber = await Subscriber.findOne({ email: req.query.EMAIL });
     if (subscriber) {
       return res
         .status(200)
