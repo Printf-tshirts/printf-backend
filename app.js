@@ -16,7 +16,11 @@ const app = express();
 // app.use(cors());
 app.use(
   cors({
-    origin: ["https://printcoder.com", "https://sisanc.printcoder.com"],
+    origin: [
+      "https://printcoder.com",
+      "https://sisanc.printcoder.com",
+      "https://sisanc.com",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"], // Specify the allowed HTTP methods
     allowedHeaders: ["Content-Type", "Authorization", "x-requested-with"], // Allow only certain headers
     allowCredentials: true,
@@ -43,6 +47,7 @@ app.use("/api/colors", require("./router/colors.router"));
 app.use("/api/design-types", require("./router/designTypes.router"));
 app.use("/api/subscribers", require("./router/subscribers.router"));
 app.use("/api/contacts", require("./router/contacts.router"));
+app.use("/api/sisanc", require("./router/sisanc.router"));
 app.use("/api/bulk-orders", require("./router/bulkOrder.router"));
 
 const PORT = process.env.PORT || 5000;
