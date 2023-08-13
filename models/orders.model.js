@@ -6,6 +6,7 @@ const OrdersSchema = new mongoose.Schema(
     cart: { type: mongoose.Schema.Types.ObjectId, ref: "carts" },
     address: { type: mongoose.Schema.Types.ObjectId, ref: "addresses" },
     payment: { type: mongoose.Schema.Types.ObjectId, ref: "payments" },
+    razorpay_payment_id: { type: String },
     handle: { type: String, unique: true },
     status: { type: String },
     isDeleted: { type: Boolean, default: false },
